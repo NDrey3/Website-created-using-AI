@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мой сайт — начинающий разработчик</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="cursor-glow"></div>
+
+  <!-- Секция hero -->
+  <section class="hero">
+    <div class="bubbles"></div>
+    <div class="hero-wrapper">
+      <h1>Андрей Ермолин</h1>
+      <p>Начинающий веб-разработчик, увлечённый технологиями, искусственным интеллектом и созданием красивого кода.</p>
+      <h2>Мой путь в IT + AI</h2>
+      <a href="#skills" class="cta-button">Мои навыки</a>
+    </div>
+  </section>
+
+  <!-- Секция навыков -->
+  <section id="skills" class="skills">
+    <h2>Мои навыки</h2>
+    <button id="add-skill-btn" class="cta-button">+ Добавить навык</button>
+    <div class="skills-grid">
+      <!-- карточки будут добавляться через JS -->
+    </div>
+  </section>
+
+  <!-- === Секция "Мой индекс навыков" (горизонтальная) === -->
+  <section id="skill-index" class="skill-index horizontal">
+    <h2>Мой индекс навыков</h2>
+
+    <!-- Гейдж -->
+    <div class="gauge-container">
+      <div class="gauge-fill" id="gauge-fill"></div>
+      <div class="gauge-value" id="gauge-value">0%</div>
+    </div>
+    <p class="gauge-text" id="gauge-text">Начинающий, верный старт</p>
+
+    <!-- Слайдеры в строку -->
+    <div class="sliders-row">
+      <div class="skill-slider">
+        <label for="html-slider">HTML</label>
+        <input type="range" id="html-slider" min="0" max="100" value="60">
+        <span class="slider-value" id="html-value">60%</span>
+      </div>
+      <div class="skill-slider">
+        <label for="css-slider">CSS</label>
+        <input type="range" id="css-slider" min="0" max="100" value="55">
+        <span class="slider-value" id="css-value">55%</span>
+      </div>
+      <div class="skill-slider">
+        <label for="js-slider">JS</label>
+        <input type="range" id="js-slider" min="0" max="100" value="40">
+        <span class="slider-value" id="js-value">40%</span>
+      </div>
+      <div class="skill-slider">
+        <label for="react-slider">React/Vue</label>
+        <input type="range" id="react-slider" min="0" max="100" value="20">
+        <span class="slider-value" id="react-value">20%</span>
+      </div>
+      <div class="skill-slider">
+        <label for="ai-slider">LLM</label>
+        <input type="range" id="ai-slider" min="0" max="100" value="70">
+        <span class="slider-value" id="ai-value">70%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === Секция "Мои контакты" === -->
+  <section id="contacts" class="contacts">
+    <h2>Мои контакты</h2>
+    <a href="https://t.me/@N_Drey3" target="_blank" class="contact-button">
+      💬 Связаться со мной в Telegram
+    </a>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

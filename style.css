@@ -1,0 +1,696 @@
+/* === Переменные === */
+:root {
+  --accent: #6c5ce7;
+  /* Мягкий фиолетовый */
+  --accent-hover: #a29bfe;
+  --bg-dark: #0f0f25;
+  --text-light: #e0e0ff;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-border: rgba(255, 255, 255, 0.15);
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 15px 40px rgba(108, 92, 231, 0.25);
+  --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(135deg, #1e1e3f, #0f0f25) fixed;
+  color: var(--text-light);
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* === Подключение шрифта === */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle 100px at center,
+    rgba(108, 92, 231, 0.25),
+    rgba(108, 92, 231, 0.05),
+    transparent
+  );
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Показываем только на десктопе */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-glow {
+    opacity: 1;
+  }
+}
+
+/* === Hero-секция — на весь экран === */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.hero-wrapper {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  animation: floatIn 1.2s ease-out;
+  overflow: hidden;
+  margin: 0;
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(1px);
+  animation: floatBubble linear infinite;
+}
+
+@keyframes floatBubble {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-105vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.hero h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--accent-hover);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* === Кнопка CTA === */
+.cta-button {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background: rgba(108, 92, 231, 0.2);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  border: 1px solid var(--accent);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(4px);
+  transition: var(--transition);
+  margin-bottom: 2rem;
+}
+
+.cta-button:hover {
+  background: rgba(108, 92, 231, 0.35);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* === Секция навыков === */
+.skills {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.skills h2 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* === Сетка навыков === */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* === Карточка навыка === */
+.skill-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem 1.8rem 1.5rem;
+  transition: var(--transition);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.skill-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-hover);
+}
+
+/* === Элементы внутри карточки === */
+.skill-card h3 {
+  font-size: 1.3rem;
+  margin: 0 0 0.6rem 0;
+  color: white;
+  font-weight: 500;
+}
+
+.skill-card p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #d0d0ff;
+  opacity: 0.85;
+}
+
+/* === Чекбокс — левый верхний угол === */
+.skill-card .skill-header {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+}
+
+.skill-card .complete-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.skill-card .checkbox-label {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  position: relative;
+}
+
+.skill-card .checkbox-label::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  background: rgba(108, 92, 231, 0.1);
+  transition: all 0.2s;
+}
+
+.skill-card .complete-checkbox:checked+.checkbox-label::before {
+  background: var(--accent);
+}
+
+.skill-card .complete-checkbox:checked+.checkbox-label::after {
+  content: '✓';
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* === Кнопка удаления === */
+.card-options {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+.options-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-card:hover .options-btn {
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.options-btn:active {
+  transform: scale(0.95);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* === Завершённый навык === */
+.skill-card.completed {
+  opacity: 0.7;
+  background: rgba(108, 92, 231, 0.05);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.skill-card.completed h3,
+.skill-card.completed p {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.skill-card.completed .checkbox-label::before {
+  border-color: #888;
+  background: #888;
+}
+
+/* === Анимация появления карточек === */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Адаптивность === */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+
+  .hero h2 {
+    font-size: 1.6rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+  }
+
+  .skills h2 {
+    font-size: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    padding: 1.6rem 1.4rem;
+    height: 200px;
+  }
+
+  .skill-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .skill-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* === Лёгкое дыхание — плавающая анимация === */
+.hero,
+.skill-card {
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+/* === Секция "Мой индекс навыков" (горизонтальная) === */
+.skill-index.horizontal {
+  width: 100%;
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  animation: floatIn 1.2s ease-out;
+}
+
+.skill-index.horizontal h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* Гейдж на всю ширину */
+.gauge-container {
+  position: relative;
+  width: 100%;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin: 1.2rem 0;
+}
+
+.gauge-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: 14px;
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.4, 1);
+}
+
+.gauge-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.gauge-text {
+  font-size: 1rem;
+  color: var(--text-light);
+  text-align: center;
+  margin: 0.8rem 0 1.8rem;
+  opacity: 0.9;
+}
+
+/* Горизонтальная строка слайдеров */
+.sliders-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.skill-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  flex: 1;
+}
+
+.skill-slider label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.skill-slider input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.skill-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.skill-slider input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.skill-slider input[type="range"]:active::-webkit-slider-thumb {
+  transform: scale(1.2);
+}
+
+.slider-value {
+  font-size: 0.85rem;
+  color: var(--accent-hover);
+  font-weight: 500;
+  margin-top: 0.4rem;
+}
+
+/* === Адаптивность — на мобильных переходит в 2 строки === */
+@media (max-width: 900px) {
+  .sliders-row {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .skill-slider {
+    min-width: 130px;
+    max-width: 140px;
+  }
+
+  .skill-index.horizontal {
+    padding: 1.5rem;
+    margin: 2.5rem 1rem;
+  }
+
+  .skill-index.horizontal h2 {
+    font-size: 1.8rem;
+  }
+
+  .gauge-container {
+    height: 26px;
+  }
+
+  .gauge-value {
+    font-size: 0.9rem;
+  }
+
+  .gauge-text {
+    font-size: 0.95rem;
+  }
+
+  .skill-slider label {
+    font-size: 0.9rem;
+  }
+
+  .slider-value {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .skill-slider {
+    min-width: 120px;
+    flex: 1 1 45%;
+  }
+  .sliders-row {
+    gap: 1rem;
+  }
+}
+
+/* === Секция "Мои контакты" === */
+.contacts {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  animation: floatIn 1.2s ease-out;
+}
+
+.contacts h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.8rem;
+  background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* Кнопка-ссылка на Telegram */
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.9rem 2rem;
+  color: white;
+  background: rgba(66, 165, 245, 0.2); /* Синий оттенок Telegram */
+  border: 1px solid rgba(66, 165, 245, 0.4);
+  border-radius: 12px;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 32px rgba(66, 165, 245, 0.15);
+  transition: all 0.3s ease;
+  max-width: 400px;
+  word-break: break-all;
+  text-align: center;
+}
+
+.contact-button:hover {
+  background: rgba(66, 165, 245, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(66, 165, 245, 0.25);
+  border-color: rgba(66, 165, 245, 0.6);
+}
+
+.contact-button:active {
+  transform: translateY(-2px);
+}
+
+.contact-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .contacts {
+    padding: 2rem 1.5rem;
+    margin: 2.5rem 1rem;
+  }
+
+  .contacts h2 {
+    font-size: 1.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 500px) {
+  .contact-button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.4rem;
+    line-height: 1.4;
+  }
+}
